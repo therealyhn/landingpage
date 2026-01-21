@@ -21,9 +21,9 @@ export default function CTASection() {
               build window.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button href="#">DM ‘BOOKINGS’ on Instagram</Button>
-              <Button href="#" variant="secondary">
-                See Demo
+              <Button href="https://www.instagram.com/jovanljusic_asdf/" target="_blank">DM ‘BOOKINGS’ on Instagram</Button>
+              <Button variant="secondary">
+                <a href="https://www.instagram.com/jovanljusic_asdf/" target="_blank">See Demo</a>
               </Button>
             </div>
           </div>
