@@ -1,3 +1,40 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+ @import "tailwindcss/base";
+ @import "tailwindcss/components";
+ @import "tailwindcss/utilities";
+
+ @layer base
+ {
+   :root
+   {
+     color-scheme: dark;
+   }
+
+   body
+   {
+     background-color: theme('colors.bg');
+     color: theme('colors.text');
+     font-family: theme('fontFamily.sans');
+     font-size: theme('fontSize.body.0');
+     line-height: theme('fontSize.body.1.lineHeight');
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+   }
+
+   h1,
+   h2,
+   h3,
+   h4
+   {
+     font-family: theme('fontFamily.display');
+   }
+
+   a
+   {
+     color: theme('colors.text');
+   }
+
+   ::selection
+   {
+     background-color: rgba(126, 231, 255, 0.2);
+   }
+ }
