@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import Container from '../ui/Container'
+import Lightbox from '../ui/Lightbox'
 import Modal from '../ui/Modal'
 import SectionHeading from '../ui/SectionHeading'
 import useCarousel from '../../hooks/useCarousel'
@@ -11,6 +13,20 @@ const previews = [
     description:
       'Minimalist hero, bold type, and a fast booking path tuned for late-night venues.',
     images: [
+      {
+        label: 'Booking Modal',
+        alt: 'XTY Music booking modal',
+        src: '/previews/xty-bookingmodal-desktop.png',
+        srcSet:
+          '/previews/xty-bookingmodal-mobile.png 640w, /previews/xty-bookingmodal-desktop.png 1280w',
+      },
+      {
+        label: 'Booking',
+        alt: 'XTY Music booking section',
+        src: '/previews/xty-booking-desktop.png',
+        srcSet:
+          '/previews/xty-booking-mobile.png 640w, /previews/xty-booking-desktop.png 1280w',
+      },
       {
         label: 'Mashups',
         alt: 'XTY Music mashups section',
@@ -32,27 +48,21 @@ const previews = [
         srcSet:
           '/previews/xty-gallery-mobile.png 640w, /previews/xty-gallery-desktop.png 1280w',
       },
-      {
-        label: 'Booking',
-        alt: 'XTY Music booking section',
-        src: '/previews/xty-booking-desktop.png',
-        srcSet:
-          '/previews/xty-booking-mobile.png 640w, /previews/xty-booking-desktop.png 1280w',
-      },
-      {
-        label: 'Booking Modal',
-        alt: 'XTY Music booking modal',
-        src: '/previews/xty-bookingmodal-desktop.png',
-        srcSet:
-          '/previews/xty-bookingmodal-mobile.png 640w, /previews/xty-bookingmodal-desktop.png 1280w',
-      },
+
     ],
   },
   {
-    title: 'AJCreative - Graphic Designer & Photographer Portfolio',
+    title: 'AJCreative',
     description:
       'Short-form inquiry layout that moves from IG click to confirmed date.',
     images: [
+      {
+        label: 'Home',
+        alt: 'AJ Creative home section',
+        src: '/previews/aj-home-desktop.png',
+        srcSet:
+          '/previews/aj-home-mobile.png 640w, /previews/aj-home-desktop.png 1280w',
+      },
       {
         label: 'Portfolio',
         alt: 'AJ Creative portfolio section',
@@ -67,13 +77,7 @@ const previews = [
         srcSet:
           '/previews/aj-modal-mobile.png 640w, /previews/aj-modal-desktop.png 1280w',
       },
-      {
-        label: 'Home',
-        alt: 'AJ Creative home section',
-        src: '/previews/aj-home-desktop.png',
-        srcSet:
-          '/previews/aj-home-mobile.png 640w, /previews/aj-home-desktop.png 1280w',
-      },
+
     ],
   },
 ]
@@ -81,6 +85,12 @@ const previews = [
 export default function WorkPreview() {
   const { activeItem, isOpen, modalRef, openModal, closeModal } = useModal()
   const carousel = useCarousel(activeItem?.images || [])
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+
+  useEffect(() => {
+    if (activeItem) carousel.goTo(0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeItem])
 
   useKeypress(
     'ArrowRight',
@@ -97,6 +107,11 @@ export default function WorkPreview() {
     },
     isOpen
   )
+
+  const handleCloseModal = () => {
+    setIsLightboxOpen(false)
+    closeModal()
+  }
 
   return (
     <section className="bg-bg text-text">
@@ -148,7 +163,7 @@ export default function WorkPreview() {
         modalRef={modalRef}
         title={activeItem?.title}
         description={activeItem?.description}
-        onClose={closeModal}
+        onClose={handleCloseModal}
       >
         <div className="flex flex-col gap-6">
           <div className="flex items-center justify-between">
@@ -184,6 +199,7 @@ export default function WorkPreview() {
                 decoding="async"
                 width="1280"
                 height="720"
+                onClick={() => setIsLightboxOpen(true)}
               />
             </div>
           ) : null}
@@ -204,8 +220,24 @@ export default function WorkPreview() {
               ))}
             </div>
           ) : null}
+          <button
+            type="button"
+            onClick={() => setIsLightboxOpen(true)}
+            className="self-start rounded-chip border border-border px-4 py-2 text-label font-semibold uppercase tracking-[0.12em] text-muted transition hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+          >
+            Fullscreen
+          </button>
         </div>
       </Modal>
+
+      <Lightbox
+        items={activeItem?.images || []}
+        activeIndex={carousel.index}
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        onPrev={carousel.prev}
+        onNext={carousel.next}
+      />
     </section>
   )
 }

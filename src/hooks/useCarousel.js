@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useCallback } from 'react'
 
 export default function useCarousel(items = []) {
   const count = items.length
@@ -9,21 +9,21 @@ export default function useCarousel(items = []) {
     return Math.min(Math.max(index, 0), count - 1)
   }, [count, index])
 
-  const goTo = (nextIndex) => {
+  const goTo = useCallback((nextIndex) => {
     if (count === 0) return
     const bounded = Math.min(Math.max(nextIndex, 0), count - 1)
     setIndex(bounded)
-  }
+  }, [count])
 
-  const next = () => {
+  const next = useCallback(() => {
     if (count === 0) return
     setIndex((prev) => (prev + 1 > count - 1 ? 0 : prev + 1))
-  }
+  }, [count])
 
-  const prev = () => {
+  const prev = useCallback(() => {
     if (count === 0) return
     setIndex((prev) => (prev - 1 < 0 ? count - 1 : prev - 1))
-  }
+  }, [count])
 
   return {
     index: safeIndex,

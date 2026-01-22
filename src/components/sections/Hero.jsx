@@ -25,7 +25,7 @@ export default function Hero() {
                 Turn Your IG Into Paid Bookings
               </h1>
               <p className="text-body text-muted">
-                High-end DJ websites built by a DJ + Front-End Dev.
+                High-end DJ and Club websites built by a DJ + Front-End Dev.
               </p>
             </div>
             <div className="flex flex-col gap-4 border-l border-border pl-6">
