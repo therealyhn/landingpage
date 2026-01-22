@@ -9,7 +9,7 @@ export default function Footer() {
             <span className="text-body font-semibold text-text">
               DM ‘BOOKINGS’ on Instagram
             </span>
-            <a href="https://jovanljusic.com" className="text-body text-muted">jovanljusic.com</a>
+            <a href="https://jovanljusic.com" className="text-body text-muted">MY PORTFOLIO</a>
           </div>
           <span className="text-label font-semibold uppercase tracking-[0.12em] text-muted">
             Proof Asset Landing

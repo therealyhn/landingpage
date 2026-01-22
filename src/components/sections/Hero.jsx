@@ -49,7 +49,7 @@ export default function Hero() {
             <div className="flex flex-wrap items-center gap-4">
               <Button href="https://www.instagram.com/jovanljusic_asdf/" target="_blank">DM ‘BOOKINGS’ on Instagram</Button>
               <Button variant="secondary">
-                <a href="https://www.instagram.com/jovanljusic_asdf/" target="_blank">See Demo</a>
+                <a href="https://djdemo.jovanljusic.com" target="_blank">See Demo</a>
               </Button>
             </div>
           </div>
